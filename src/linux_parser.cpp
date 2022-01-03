@@ -137,7 +137,7 @@ long LinuxParser::CpuUtilization(int pid) {
   long seconds = uptime - starttime;
 
   if(seconds) {
-    return 100*((totalTime / hertz) / seconds);
+    return ((totalTime / hertz) / seconds);
   }
   return 0;
  }
@@ -309,5 +309,5 @@ long LinuxParser::UpTime(int pid) {
       line.erase(0, pos + 1);
     }
   }
-  return stol(values[21])/sysconf(_SC_CLK_TCK);
+  return UpTime() - stol(values[21])/sysconf(_SC_CLK_TCK);
  }
